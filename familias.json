@@ -14,9 +14,24 @@
         "cantidad": 4,
         "usado": false
     },
-    "CASTANEDA001": {  // <-- ¡ESTA ES LA NUEVA ENTRADA!
+    "CASTANEDA001": {
         "familia": "Castañeda",
         "cantidad": 6,
+        "usado": false
+    },
+    "GARCIA001": {
+        "familia": "García",
+        "cantidad": 4,
+        "usado": false
+    },
+    "RAMOS001": {
+        "familia": "Ramos",
+        "cantidad": 2,
+        "usado": false
+    },
+    "TORRES001": {
+        "familia": "Torres",
+        "cantidad": 7,
         "usado": false
     }
 }
