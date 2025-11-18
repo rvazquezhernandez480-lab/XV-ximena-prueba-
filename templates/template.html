@@ -3,37 +3,152 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Baile Real - Registro de Asistencia</title>
-</head>
-<body style="font-family: 'Garamond', serif; background-color: #F0F8FF; color: #333333; margin: 0; padding: 20px; text-align: center;">
+    <title>Baile Real - Pase Confirmado</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&display=swap" rel="stylesheet">
     
-    <div style="max-width: 600px; margin: 40px auto; padding: 30px; background-color: #FFFFFF; border: 3px solid #ADD8E6; border-radius: 15px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+    <style>
+        /* ------------------------------------- */
+        /* 1. ANIMACIONES KEYFRAMES (MAGIA) */
+        /* ------------------------------------- */
+
+        /* Efecto de aparecer suavemente */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Efecto de brillo sutil en el texto */
+        @keyframes shimmer {
+            0% { text-shadow: 0 0 1px rgba(255, 255, 255, 0.5); }
+            50% { text-shadow: 0 0 5px rgba(255, 255, 255, 0.8), 0 0 10px rgba(173, 216, 230, 0.7); }
+            100% { text-shadow: 0 0 1px rgba(255, 255, 255, 0.5); }
+        }
+
+        /* ------------------------------------- */
+        /* 2. ESTILOS BASE (TEMÁTICA CENICIENTA) */
+        /* ------------------------------------- */
+
+        body {
+            font-family: 'Cormorant Garamond', serif;
+            background-color: #F0F8FF; /* Azul Alicia (Fondo suave de Cenicienta) */
+            background-image: linear-gradient(135deg, #F0F8FF 0%, #E6E6FA 100%); /* Degradado suave */
+            margin: 0;
+            padding: 50px 20px;
+            text-align: center;
+        }
+
+        .carriage-container {
+            max-width: 450px; 
+            margin: 0 auto;
+            padding: 40px 30px;
+            background-color: #FFFFFF; 
+            border: 5px solid #ADD8E6; /* Borde Azul Claro */
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            /* APLICAR ANIMACIÓN PRINCIPAL */
+            animation: fadeIn 1.5s ease-out;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Detalles de las esquinas (toque decorativo) */
+        .corner-deco {
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            border: 4px solid #C8A760; /* Dorado */
+            opacity: 0.5;
+            animation: shimmer 4s infinite;
+        }
+        .top-left { top: 0; left: 0; border-right: none; border-bottom: none; border-radius: 10px 0 0 0; }
+        .bottom-right { bottom: 0; right: 0; border-left: none; border-top: none; border-radius: 0 0 10px 0; }
+
+        .header-title {
+            color: #4682B4; /* Azul Acero (Azul Real) */
+            font-size: 2.8em;
+            margin-bottom: 5px;
+            animation: shimmer 3s infinite;
+        }
+
+        .subtitle {
+            color: #C8A760; /* Dorado */
+            font-size: 1.2em;
+            margin-bottom: 30px;
+        }
+
+        .info-label {
+            color: #6A5ACD; /* Azul Pizarra (Elegante) */
+            font-size: 1.1em;
+            font-weight: 600;
+            display: block;
+            margin-top: 20px;
+        }
+
+        .data-highlight {
+            color: #4682B4; /* Azul Real */
+            font-size: 1.8em;
+            font-weight: 700;
+            display: block;
+            padding: 5px 0;
+            border-bottom: 1px dotted #ADD8E6;
+        }
+
+        .success-box {
+            background-color: #D4EDDA; 
+            color: #155724; 
+            font-weight: bold;
+            font-size: 1.5em;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 40px;
+            /* SEGUNDA ANIMACIÓN DE ÉXITO */
+            animation: fadeIn 2s ease-out 0.5s forwards; /* 0.5s de retraso */
+            opacity: 0; /* Empieza invisible */
+        }
         
-        <h1 style="color: #4682B4; border-bottom: 2px solid #B0C4DE; padding-bottom: 15px; margin-bottom: 20px; font-size: 2.5em; text-shadow: 1px 1px 2px #E0FFFF;">
-            ✨ ¡Bienvenidos al Baile Real! ✨
+    </style>
+</head>
+<body>
+    
+    <div class="carriage-container">
+        <div class="corner-deco top-left"></div>
+        <div class="corner-deco bottom-right"></div>
+
+        <h1 class="header-title">
+            ✨ Pase de Baile Real ✨
         </h1>
         
-        <p style="font-size: 1.1em; color: #808080;">
-            Evento: XV Años de la Princesa [Nombre]
-            <br>
-            Fecha y Hora: **[Ej. 15 de Noviembre de 2025 - 8:00 PM]**
+        <p class="subtitle">
+            ¡Su asistencia ha sido registrada!
         </p>
 
-        <p style="font-size: 1.2em; margin-bottom: 15px;">
-            <span style="font-weight: bold; color: #808080;">Pase autorizado para:</span>
-            <br>
-            <b style="color: #4682B4; font-size: 1.6em; display: block; padding: 5px 0;">{{familia}}</b>
-        </p>
+        <div style="background-color: #F8F8FF; padding: 15px; border-radius: 10px; margin-bottom: 30px; border: 1px solid #E6E6FA;">
+            <p style="color: #6A5ACD; font-size: 1.1em; margin: 5px 0;">
+                **Lugar:** Gran Salón de Cristal
+            </p>
+            <p style="color: #6A5ACD; font-size: 1.1em; margin: 5px 0;">
+                **Fecha:** 15 de Noviembre de 2025 | **Hora:** 8:00 PM
+            </p>
+        </div>
+
+
+        <span class="info-label">
+            Familia Real Invitada:
+        </span>
+        <span class="data-highlight">
+            {{familia}}
+        </span>
         
-        <p style="font-size: 1.2em; margin-bottom: 25px;">
-            <span style="font-weight: bold; color: #808080;">Invitados en la carroza:</span>
-            <br>
-            <b style="color: #4682B4; font-size: 1.6em; display: block; padding: 5px 0;">{{cantidad}}</b>
-        </p>
+        <span class="info-label">
+            Pases Autorizados:
+        </span>
+        <span class="data-highlight">
+            {{cantidad}}
+        </span>
         
-        <p style="color: #28a745; font-weight: bold; font-size: 1.4em; padding: 10px; background-color: #D4EDDA; border-radius: 8px;">
-            Registro completado ✔ ¡Disfruten la noche!
-        </p>
+        <div class="success-box">
+            Registro Completado ✔
+        </div>
         
     </div>
     
