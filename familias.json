@@ -13,5 +13,10 @@
         "familia": "Hernández",
         "cantidad": 4,
         "usado": false
+    },
+    "CASTANEDA001": {  // <-- ¡ESTA ES LA NUEVA ENTRADA!
+        "familia": "Castañeda",
+        "cantidad": 6,
+        "usado": false
     }
 }
