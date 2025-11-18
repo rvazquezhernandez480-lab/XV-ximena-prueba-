@@ -3,154 +3,303 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Baile Real - Pase Confirmado</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&display=swap" rel="stylesheet">
-    
+    <title>Baile Real - Registro de Asistencia</title>
     <style>
-        /* ------------------------------------- */
-        /* 1. ANIMACIONES KEYFRAMES (MAGIA) */
-        /* ------------------------------------- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-        /* Efecto de aparecer suavemente */
-        @keyframes fadeIn {
+        body {
+            font-family: 'Garamond', serif;
+            background: linear-gradient(135deg, #F0F8FF 0%, #E0F6FF 100%);
+            color: #333333;
+            min-height: 100vh;
+            text-align: center;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Marquee containers (decorativas) */
+        .marquee {
+            width: 100%;
+            overflow: hidden;
+            white-space: nowrap;
+            background: linear-gradient(90deg, rgba(255,255,255,0.4), rgba(255,255,255,0.1));
+            padding: 6px 0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.04);
+            position: relative;
+        }
+
+        .marquee::before,
+        .marquee::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 8%;
+            pointer-events: none;
+        }
+        /* Fade masks para suavizar los bordes del marquee */
+        .marquee::before {
+            left: 0;
+            background: linear-gradient(90deg, rgba(240,248,255,1), rgba(240,248,255,0));
+        }
+        .marquee::after {
+            right: 0;
+            background: linear-gradient(270deg, rgba(240,248,255,1), rgba(240,248,255,0));
+        }
+
+        .marquee__track {
+            display: inline-flex;
+            gap: 1.4rem;
+            align-items: center;
+            font-size: 1.05rem;
+            color: #2b6ea3;
+            font-weight: 600;
+            will-change: transform;
+            animation: marqueeLeft 14s linear infinite;
+        }
+
+        .marquee--reverse .marquee__track {
+            animation: marqueeRight 18s linear infinite;
+        }
+
+        .marquee__item {
+            display: inline-flex;
+            align-items: center;
+            gap: .5rem;
+        }
+
+        .marquee__emoji {
+            font-size: 1.2rem;
+            transform: translateY(2px);
+        }
+
+        /* Existing layout */
+        .container {
+            max-width: 600px;
+            margin: 24px auto;
+            padding: 30px;
+            background-color: #FFFFFF;
+            border: 3px solid #ADD8E6;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            animation: slideInDown 0.8s ease-out;
+        }
+
+        h1 {
+            color: #4682B4;
+            border-bottom: 2px solid #B0C4DE;
+            padding-bottom: 15px;
+            margin-bottom: 20px;
+            font-size: 2.5em;
+            text-shadow: 1px 1px 2px #E0FFFF;
+            animation: fadeInScale 1s ease-out;
+        }
+
+        .evento-info {
+            font-size: 1.1em;
+            color: #808080;
+            animation: fadeInUp 1.2s ease-out;
+        }
+
+        .familia-section {
+            font-size: 1.2em;
+            margin-bottom: 15px;
+            animation: fadeInUp 1.4s ease-out;
+        }
+
+        .familia-label {
+            font-weight: bold;
+            color: #808080;
+        }
+
+        .familia-value {
+            color: #4682B4;
+            font-size: 1.6em;
+            display: block;
+            padding: 5px 0;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        .cantidad-section {
+            font-size: 1.2em;
+            margin-bottom: 25px;
+            animation: fadeInUp 1.6s ease-out;
+        }
+
+        .cantidad-label {
+            font-weight: bold;
+            color: #808080;
+        }
+
+        .cantidad-value {
+            color: #4682B4;
+            font-size: 1.6em;
+            display: block;
+            padding: 5px 0;
+            animation: pulse 2s ease-in-out infinite 0.3s;
+        }
+
+        .success-message {
+            color: #28a745;
+            font-weight: bold;
+            font-size: 1.4em;
+            padding: 10px;
+            background-color: #D4EDDA;
+            border-radius: 8px;
+            animation: slideInUp 0.8s ease-out, bounceIn 0.6s ease-out 0.3s;
+        }
+
+        /* Animaciones existentes */
+        @keyframes slideInDown {
+            from { opacity: 0; transform: translateY(-50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes slideInUp {
+            from { opacity: 0; transform: translateY(50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeInUp {
             from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* Efecto de brillo sutil en el texto */
-        @keyframes shimmer {
-            0% { text-shadow: 0 0 1px rgba(255, 255, 255, 0.5); }
-            50% { text-shadow: 0 0 5px rgba(255, 255, 255, 0.8), 0 0 10px rgba(173, 216, 230, 0.7); }
-            100% { text-shadow: 0 0 1px rgba(255, 255, 255, 0.5); }
+        @keyframes fadeInScale {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
         }
 
-        /* ------------------------------------- */
-        /* 2. ESTILOS BASE (TEMÁTICA CENICIENTA) */
-        /* ------------------------------------- */
-
-        body {
-            font-family: 'Cormorant Garamond', serif;
-            background-color: #F0F8FF; /* Azul Alicia (Fondo suave de Cenicienta) */
-            background-image: linear-gradient(135deg, #F0F8FF 0%, #E6E6FA 100%); /* Degradado suave */
-            margin: 0;
-            padding: 50px 20px;
-            text-align: center;
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
         }
 
-        .carriage-container {
-            max-width: 450px; 
-            margin: 0 auto;
-            padding: 40px 30px;
-            background-color: #FFFFFF; 
-            border: 5px solid #ADD8E6; /* Borde Azul Claro */
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-            /* APLICAR ANIMACIÓN PRINCIPAL */
-            animation: fadeIn 1.5s ease-out;
-            position: relative;
-            overflow: hidden;
+        @keyframes bounceIn {
+            0% { opacity: 0; transform: scale(0.3); }
+            50% { opacity: 1; transform: scale(1.05); }
+            70% { transform: scale(0.9); }
+            100% { transform: scale(1); }
         }
 
-        /* Detalles de las esquinas (toque decorativo) */
-        .corner-deco {
-            position: absolute;
-            width: 50px;
-            height: 50px;
-            border: 4px solid #C8A760; /* Dorado */
-            opacity: 0.5;
-            animation: shimmer 4s infinite;
-        }
-        .top-left { top: 0; left: 0; border-right: none; border-bottom: none; border-radius: 10px 0 0 0; }
-        .bottom-right { bottom: 0; right: 0; border-left: none; border-top: none; border-radius: 0 0 10px 0; }
-
-        .header-title {
-            color: #4682B4; /* Azul Acero (Azul Real) */
-            font-size: 2.8em;
-            margin-bottom: 5px;
-            animation: shimmer 3s infinite;
+        /* Nuevas keyframes tipo marquee */
+        @keyframes marqueeLeft {
+            from { transform: translateX(100%); }
+            to   { transform: translateX(-100%); }
         }
 
-        .subtitle {
-            color: #C8A760; /* Dorado */
-            font-size: 1.2em;
-            margin-bottom: 30px;
+        @keyframes marqueeRight {
+            from { transform: translateX(-100%); }
+            to   { transform: translateX(100%); }
         }
 
-        .info-label {
-            color: #6A5ACD; /* Azul Pizarra (Elegante) */
-            font-size: 1.1em;
-            font-weight: 600;
-            display: block;
-            margin-top: 20px;
-        }
-
-        .data-highlight {
-            color: #4682B4; /* Azul Real */
-            font-size: 1.8em;
+        /* Pequeño detalle flotante (opcional) */
+        .ornament {
+            position: fixed;
+            right: 12px;
+            bottom: 12px;
+            background: linear-gradient(135deg,#fff,#e6f7ff);
+            border: 2px solid rgba(70,130,180,0.12);
+            padding: 10px 12px;
+            border-radius: 999px;
+            box-shadow: 0 6px 18px rgba(70,130,180,0.08);
             font-weight: 700;
-            display: block;
-            padding: 5px 0;
-            border-bottom: 1px dotted #ADD8E6;
+            color: #2b6ea3;
+            transform: translateY(0);
+            animation: float 3.8s ease-in-out infinite;
         }
 
-        .success-box {
-            background-color: #D4EDDA; 
-            color: #155724; 
-            font-weight: bold;
-            font-size: 1.5em;
-            padding: 20px;
-            border-radius: 10px;
-            margin-top: 40px;
-            /* SEGUNDA ANIMACIÓN DE ÉXITO */
-            animation: fadeIn 2s ease-out 0.5s forwards; /* 0.5s de retraso */
-            opacity: 0; /* Empieza invisible */
+        @keyframes float {
+            0% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0); }
         }
-        
+
+        /* Accesibilidad: reducir animaciones si el usuario lo prefiere */
+        @media (prefers-reduced-motion: reduce) {
+            .container,
+            h1,
+            .evento-info,
+            .familia-section,
+            .cantidad-section,
+            .familia-value,
+            .cantidad-value,
+            .success-message,
+            .marquee__track,
+            .ornament {
+                animation: none !important;
+                transition: none !important;
+            }
+        }
+
+        /* Ajustes responsivos para marquesinas */
+        @media (max-width: 480px) {
+            .marquee__track { font-size: 0.95rem; gap: 1rem; }
+            .container { margin: 16px; padding: 20px; }
+            h1 { font-size: 1.8rem; }
+        }
     </style>
 </head>
 <body>
-    
-    <div class="carriage-container">
-        <div class="corner-deco top-left"></div>
-        <div class="corner-deco bottom-right"></div>
+    <!-- Marquee superior -->
+    <div class="marquee" aria-hidden="true">
+        <div class="marquee__track" role="presentation">
+            <span class="marquee__item"><span class="marquee__emoji">✨</span> Baile Real — XV Años de la Princesa Ximena</span>
+            <span class="marquee__item"><span class="marquee__emoji">🎉</span> ¡Entrada exclusiva para invitados!</span>
+            <span class="marquee__item"><span class="marquee__emoji">💃</span> Música en vivo • 8:00 PM</span>
+            <span class="marquee__item"><span class="marquee__emoji">👑</span> Vístete elegante</span>
+            <!-- Se repiten para efecto continuo -->
+            <span class="marquee__item"><span class="marquee__emoji">✨</span> Baile Real — XV Años de la Princesa Ximena</span>
+            <span class="marquee__item"><span class="marquee__emoji">🎉</span> ¡Entrada exclusiva para invitados!</span>
+        </div>
+    </div>
 
-        <h1 class="header-title">
-            ✨ Pase de Baile Real ✨
-        </h1>
+    <div class="container">
         
-        <p class="subtitle">
-            ¡Su asistencia ha sido registrada!
+        <h1>✨ ¡Bienvenidos al Baile Real! ✨</h1>
+        
+        <p class="evento-info">
+            Evento: XV Años de la Princesa Ximena
+            <br>
+            Fecha y Hora: <strong>15 de Noviembre de 2025 - 8:00 PM</strong>
         </p>
 
-        <div style="background-color: #F8F8FF; padding: 15px; border-radius: 10px; margin-bottom: 30px; border: 1px solid #E6E6FA;">
-            <p style="color: #6A5ACD; font-size: 1.1em; margin: 5px 0;">
-                **Lugar:** Gran Salón de Cristal
-            </p>
-            <p style="color: #6A5ACD; font-size: 1.1em; margin: 5px 0;">
-                **Fecha:** 15 de Noviembre de 2025 | **Hora:** 8:00 PM
-            </p>
-        </div>
-
-
-        <span class="info-label">
-            Familia Real Invitada:
-        </span>
-        <span class="data-highlight">
-            {{familia}}
-        </span>
+        <p class="familia-section">
+            <span class="familia-label">Pase autorizado para:</span>
+            <br>
+            <b class="familia-value">{{familia}}</b>
+        </p>
         
-        <span class="info-label">
-            Pases Autorizados:
-        </span>
-        <span class="data-highlight">
-            {{cantidad}}
-        </span>
+        <p class="cantidad-section">
+            <span class="cantidad-label">Invitados en la carroza:</span>
+            <br>
+            <b class="cantidad-value">{{cantidad}}</b>
+        </p>
         
-        <div class="success-box">
-            Registro Completado ✔
-        </div>
+        <p class="success-message">
+            Registro completado ✔ ¡Disfruten la noche!
+        </p>
         
     </div>
+
+    <!-- Marquee inferior (dirección inversa) -->
+    <div class="marquee marquee--reverse" aria-hidden="true">
+        <div class="marquee__track" role="presentation">
+            <span class="marquee__item"><span class="marquee__emoji">👗</span> Código de vestimenta: formal</span>
+            <span class="marquee__item"><span class="marquee__emoji">🥂</span> Recepción después del baile</span>
+            <span class="marquee__item"><span class="marquee__emoji">📸</span> Photobooth • Recuerdos</span>
+            <span class="marquee__item"><span class="marquee__emoji">🎊</span> ¡Nos vemos en la pista!</span>
+            <span class="marquee__item"><span class="marquee__emoji">👗</span> Código de vestimenta: formal</span>
+            <span class="marquee__item"><span class="marquee__emoji">🥂</span> Recepción después del baile</span>
+        </div>
+    </div>
+
+    <!-- Ornament flotante -->
+    <div class="ornament" aria-hidden="true">🎀 Baile Real</div>
     
 </body>
 </html>
