@@ -1,0 +1,17 @@
+{
+    "LOPEZ001": {
+        "familia": "López",
+        "cantidad": 5,
+        "usado": false
+    },
+    "JUAREZ001": {
+        "familia": "Juárez",
+        "cantidad": 3,
+        "usado": false
+    },
+    "HERNANDEZ001": {
+        "familia": "Hernández",
+        "cantidad": 4,
+        "usado": false
+    }
+}
